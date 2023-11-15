@@ -11,14 +11,19 @@ public class App
 {
     public static void main( String[] args )
     {
-        ServerSocket server = new ServerSocket(3001);
         try{
-            Socket s = server.accept();
-            MyThread t = new MyThread(s);
-            t.start();
+            ServerSocket server = new ServerSocket(3001);
+            do{
+                Socket s = server.accept();
+                MyThread t = new MyThread(s);
+                t.start();
+            }while(true);
+            
         }
-        catch(){
-
+        catch(Exception e){
+            System.out.println("Errore di connessione");
+            System.out.println(e.getMessage());
+            System.exit(1);
         }
     }
 }
